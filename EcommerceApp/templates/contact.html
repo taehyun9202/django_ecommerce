@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact</title>
+</head>
+<body>
+    {% extends 'navbar.html' %}
+    {% block content %}
+    <div class="container">
+        <h1>Contact</h1>
+        <br></br>
+        <div class="row">
+            <div class="col-md-8">
+                <form action="/sendemail" method="post">
+                {% csrf_token %}
+                    <input type="hidden" name="name" value="{{user.firstName}} {{user.lastName}}">
+                    <input type="hidden" name="email" value="{{user.email}}">
+                <div class="col-md-10 form-group">
+                    <label>Subject</label>
+                    <input type="text" class="form-control" name="subject">
+                </div>
+                <div class="col-md-10 form-group">
+                <label>Message</label>
+                <textarea class="form-control" name="message" cols="30" rows="10"></textarea>               
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    <h5>Address</h5>
+                    <p>5309 Chieftain cir</p>
+                    <p>Alexandria, VA 22312</p>
+                </div>
+                <div>
+                    <h5>Phone</h5>
+                    <p>703-400-9295</p>
+                </div>
+                <div>
+                    <h5>Email</h5>
+                    <p>taehyun9202@hotmail.com</p>
+                </div>
+            </div> 
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item</title>
+</head>
+<body>
+  {% extends 'navbar.html' %}
+  {% block content %}
+    <div class="container">
+      {% for item in alllist%}
+        <div>
+          <img src="{{item.obj.image.url}}" alt="" width="100px" height="100px">
+          {% if item.obj.brand == 'None' %}
+              <h1>{{item.obj.name}}</h1>
+          {% else %}
+              <h1>[{{item.obj.brand}}] {{item.obj.name}}</h1>
+          {% endif %}
+          <p>{{item.quantity}}</p>
+          <p>{{item.obj.inStock}} left</p>
+          <p>$ {{item.total}} each</p>
+          <p>total $ {% widthratio item.total 1 item.quantity %}</p>
+        </div>
+      {% endfor %}
+    </div>
+  {% endblock %}
+</body>
+</html>

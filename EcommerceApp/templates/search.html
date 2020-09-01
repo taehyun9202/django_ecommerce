@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends 'navbar.html' %}
+    {% block content %}
+    <div class="container">
+        <h1>Emarket</h1>
+        {% for item in items %}
+            <img src="{{item.image.url}}" alt="" width="200px" height="200px">
+            {% if item.brand == 'None' %}
+                <a href="/item/{{item.id}}">{{item.name}}</a>
+            {% else %}
+                <a href="/item/{{item.id}}">[{{item.brand}}]{{item.name}}</a>
+            {% endif %}
+            <p>{{item.category}}</p>
+            <p>${{item.price}}</p>
+            <p>{{item.inStock}} Left</p>
+            <p>{{item.isSold}} Sold</p>
+        {% endfor %}
+    </div>
+    {% endblock %}
+</body>
+</html>

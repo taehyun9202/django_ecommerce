@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'navbar.css' %}">
+</head>
+ 
+<body>
+    <div class="sidenav">
+        <a class="" href="/"><img src="/media/forums/Emarket.png" style="width: 200px;"></a>
+        {% if user.firstName %}
+        <a class="" href="/signin">History</a>
+        {% else %}
+        <a class="" href="/signin">Sign In</a>
+        {% endif %}
+
+        {% if user.firstName %}
+        <a class="" href='/logout'>Log out</a>
+        {% endif %}
+
+        {% if user.firstName %}
+        <a class="" href='/cart'>Cart</a>
+        {% endif %}
+        
+        {% if user.firstName %}
+        <p class="">hello {{user.firstName}} {{user.lastName}}</p>
+        {% endif %}
+
+        {% if user.firstName %}
+        <a class="" href='/contact'>Contact</a>
+        {% endif %}
+
+        <div class="searchbar">
+            <form action='/search' method="post">
+            {% csrf_token %}
+            <input type="text" name="searchtext">
+            <button type="submit" class="btn btn-dark btn-sm">Search</button>
+            </form>
+        </div>
+    </div>
+    <div class="category">
+        <a href="/category/Fashion">Fashion & Beauty</a>
+        <a href="/category/Foods">Foods</a>
+        <a href="/category/Sport">Sport & Health</a>
+        <a href="/category/Electronics">Electronics & Appliance</a>
+        <a href="/category/Travel">Travel & Books</a>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

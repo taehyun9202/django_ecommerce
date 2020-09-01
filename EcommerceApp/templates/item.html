@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Item</title>
+</head>
+<body>
+    {% extends 'navbar.html' %}
+    {% block content %}
+    <div class="container">
+        <div class="content content-sm-12">
+            <form action='/addtoCart/{{item.id}}' method="post">
+            {% csrf_token %}
+            <h1>{{item.name}}</h1>
+            <br></br>   
+            <div class="row">
+                <div class="col-lg-6">
+                    <img class="profile" src="{{item.image.url}}" style="width: 500px; height: 430px;">  
+                </div>
+                <div class="col-lg-6">
+                    {% if item.brand == 'None' %}
+                        <h1>{{item.name}}</h1>
+                    {% else %}
+                        <h1>[{{item.brand}}] {{item.name}}</h1>
+                    {% endif %}
+                    <h4>$ {{item.price}}</h4>
+                    <p>{{item.description}}</p>
+                    {% for option in options %}
+                        <select name='selected'>
+                            {% if option.extra == 0 %}
+                                <option class="option" name="option" value="{{option.id}}">{{option.choice}}</option>
+                            {% else %}
+                                <option class="option" name="option" value="{{option.id}}">{{option.choice}} +${{option.extra}}</option>
+                            {% endif %}
+                        </select>
+                            
+                    {% endfor %}
+                    <br><br>
+                    <input type="number" name="quantity" id="">
+                    <br><br>
+                    <button type="submit" class="btn btn-dark btn-sm"; style="margin-bottom: 5px;">Add to Cart</button>
+                </div> 
+            </div>
+            </form>
+            <br></br>
+            <h3>More Works</h3>
+            <pre></pre>
+            <span></span>
+            {% for item in others %}
+                <div style="display: inline-block;">
+                    <a href='/item/{{item.id}}'><img class="moreworks" src="{{item.image.url}}" style="width: 150px; height: 150px;"></a>
+                    <p>{{item.name}}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endblock %}
+</body>
+</html>
